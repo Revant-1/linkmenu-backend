@@ -25,7 +25,17 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+
+// Middleware
+app.use(cors({
+  origin: 'https://linkmenu.netlify.app', // Frontend URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  credentials: true, // Support cookies or auth headers
+}));
+
+app.options('*', cors()); // Handle preflight requests
+
 app.use(express.json());
 
 // Routes
